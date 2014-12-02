@@ -33,7 +33,7 @@ echo "<div class=\"menu\">";
 
 echo "<form action=\"login.php\" method=\"get\">
 		  <input type=\"text\" Name=\"username\" placeholder=\"Username\" style=\"width: 200px;\">
-          <input type=\"submit\" value=\"Log In\" style=\"width: 100px;\">
+        <input type=\"submit\" value=\"Log In\" style=\"width: 100px;\">
 	  </form>";
 
 echo "<br/>";
