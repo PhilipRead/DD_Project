@@ -27,7 +27,7 @@ input[type=submit] {
 
 <?php
 
-$username= $_GET['username'];
+$username= $_POST['username'];
 
 echo "<p> $username </p>";
 

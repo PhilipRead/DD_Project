@@ -32,7 +32,7 @@ echo "<p> DnD Simulator </p>";
 echo "<div class=\"menu\">";
 
 echo "<form action=\"login.php\" method=\"get\">
-		  <input type=\"text\" Name=\"username\" placeholder=\"Username\" style=\"width: 200px;\">
+		  <input type=\"text\" Name=\"uname\" placeholder=\"Username\" style=\"width: 200px;\">
           <input type=\"submit\" value=\"Continue\" style=\"width: 100px;\">
 	  </form>";
 
