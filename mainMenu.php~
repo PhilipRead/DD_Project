@@ -39,7 +39,7 @@ echo "<form action=\"login.php\" method=\"get\">
 echo "<br/>";
 
 echo "<form action=\"newPlayer.php\" method=\"get\">
-		  <input type=\"submit\" value=\"Create Account\" style=\"width: 300px;\">
+		  <input type=\"submit\" value=\"Create New Account\" style=\"width: 300px;\">
 	  </form>";
 
 echo "</div>";

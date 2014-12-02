@@ -27,8 +27,6 @@ input[type=submit] {
 
 <?php
 
-$username= $_GET['username'];
-
-echo "<p> $username </p>";
+echo "<p> newCharacter Test </p>";
 
 ?>

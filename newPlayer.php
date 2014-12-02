@@ -27,19 +27,13 @@ input[type=submit] {
 
 <?php
 
-echo "<p> DnD Simulator </p>";
+echo "<p> Create Account </p>";
 
 echo "<div class=\"menu\">";
 
-echo "<form action=\"login.php\" method=\"get\">
+echo "<form action=\"newCharacter.php\" method=\"get\">
 		  <input type=\"text\" Name=\"username\" placeholder=\"Username\" style=\"width: 200px;\">
-          <input type=\"submit\" value=\"Log In\" style=\"width: 100px;\">
-	  </form>";
-
-echo "<br/>";
-
-echo "<form action=\"newPlayer.php\" method=\"get\">
-		  <input type=\"submit\" value=\"Create Account\" style=\"width: 300px;\">
+          <input type=\"submit\" value=\"Create\" style=\"width: 100px;\">
 	  </form>";
 
 echo "</div>";
