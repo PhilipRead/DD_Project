@@ -40,22 +40,32 @@ if ($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$result = $conn->query("SELECT questCount FROM SystemVals");
+$result = $conn->query("SELECT itemCount FROM SystemVals");
 
-$Quest_ID = $result->fetch_assoc()[$result->fetch_field_direct(0)->name];
-$Details = $_GET["description"];
+$Item_ID = $result->fetch_assoc()[$result->fetch_field_direct(0)->name];
+$Name = $_GET["name"];
+$Ability = $_GET["ability"];
+$Cost = $_GET["cost"];
+$Weight = $_GET["weight"];
+$Type = $_GET["type"];
+$Loc_ID = $_GET["location"];
 
-$sql = "INSERT INTO Quest VALUES ("
-. $Quest_ID . ", "
-. "\"" . $Details . "\")";
+$sql = "INSERT INTO Items VALUES ("
+. $Item_ID . ", "
+. "\"" . $Name . "\", "
+. $Ability . ", "
+. $Cost . ", "
+. $Weight . ", "
+. $Type . ", "
+. $Loc_ID . ")";
 
 $conn->query($sql);
 
-$conn->query("UPDATE SystemVals SET questCount = questCount + 1");
+$conn->query("UPDATE SystemVals SET itemCount = itemCount + 1");
 
 ?>
 
-<p> Quest Created! </p>
+<p> Item Created! </p>
 
 <div class="menu">
 	<form action="mainMenu.php" method="get">

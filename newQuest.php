@@ -19,9 +19,25 @@ form {
 }
 
 input[type=submit] {
-	width: 300px;
+	width: 500px;
+}
+
+textarea {
+	resize: none;
+	width: 500px;
+	height: 250px;
 }
 
 </style>
 
+<p> Create Quest </p>
 
+<div class="menu">
+	<form action="createdQuest.php" method="get">
+		<textarea name="description"></textarea>
+
+		<br /><br /><br />
+
+		<input type="submit" value="Submit">
+	</form>
+</div>

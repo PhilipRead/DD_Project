@@ -29,7 +29,7 @@ form {
 }
 
 input[type=submit] {
-	width: 125px;
+	width: 500px;
 }
 
 </style>
@@ -74,9 +74,9 @@ input[type=submit] {
 
 		<input type="text" title="Luck" Name="lck" placeholder="Luck" style="width: 225px; margin-right: 275px;">
 
-		<br /><br /><br />
+		<br /><br />
 
-		<input type="submit" value="Submit" style="width: 500px;">
+		<input type="submit" value="Submit">
 
 	</form>
 </div>

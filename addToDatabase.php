@@ -28,19 +28,19 @@ input[type=submit] {
 
 <div class="menu">
 	<form action="newCharacter.php" method="get">
-		<input type="submit" value="New Character" style="width: 300px;">
+		<input type="submit" value="New Character">
 	</form>
 
 	<br />
 
 	<form action="newQuest.php" method="get">
-		<input type="submit" value="New Quest" style="width: 300px;">
+		<input type="submit" value="New Quest">
 	</form>
 
 	<br />
 
 	<form action="newItem.php" method="get">
-		<input type="submit" value="New Item" style="width: 300px;">
+		<input type="submit" value="New Item">
 	</form>
 
 	<br />
