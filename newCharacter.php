@@ -1,4 +1,3 @@
-
 <style type="text/css">
 body {
 	background-color: black;
@@ -35,66 +34,49 @@ input[type=submit] {
 
 </style>
 
-<?php
+<p> Create Character </p>
 
-$username= $_GET['username'];
+<div style="text-align: center;">
+	<form action="createdCharacter.php" method="get">
+		<input type="text" title="Character Name" Name="charName" placeholder="Character Name" style="width: 500px;">
 
-echo "<p> $username </p>";
+		<br /><br />
 
-echo "<div style=\"text-align: center;\">";
+		<input type="text" title="Gender" Name="gender" placeholder="Gender" class="left">
+		<input type="text" title="Race" Name="race" placeholder="Race" class="right">
 
-echo "<form action=\"createdCharacter.php\" method=\"get\">";
+		<br /><br />
 
-echo "<input type=\"text\" title=\"Character Name\" Name=\"charName\" placeholder=\"Character Name\" style=\"width: 500px;\">";
+		<input type="text" title="Class" Name="class" placeholder="Class" class="left">
+		<input type="text" title="Alignment" Name="alignment" placeholder="Alignment" class="right">
 
-echo "<br /><br />";
+		<br /><br />
 
-echo "<input type=\"text\" title=\"Gender\" Name=\"gender\" placeholder=\"Gender\" class=\"left\">";
+		<input type="text" title="Level" Name="level" placeholder="Level" class="left">
+		<input type="text" title="Starting Location" Name="location" placeholder="Starting Location" class="right">
 
-echo "<input type=\"text\" title=\"Race\" Name=\"race\" placeholder=\"Race\" class=\"right\">";
+		<br /><br />
 
-echo "<br /><br />";
+		<input type="text" title="Strength" Name="str" placeholder="Strength" class="left">
+		<input type="text" title="Dextertiy" Name="dex" placeholder="Dexterity" class="right">
 
-echo "<input type=\"text\" title=\"Class\" Name=\"class\" placeholder=\"Class\" class=\"left\">";
+		<br /><br />
 
-echo "<input type=\"text\" title=\"Alignment\" Name=\"alignment\" placeholder=\"Alignment\" class=\"right\">";
+		<input type="text" title="Constitution" Name="con" placeholder="Constitution" class="left">
+		<input type="text" title="Inteligence" Name="intl" placeholder="Inteligence" class="right">
 
-echo "<br /><br />";
+		<br /><br />
 
-echo "<input type=\"text\" title=\"Level\" Name=\"level\" placeholder=\"Level\" class=\"left\">";
+		<input type="text" title="Wisdom" Name="wis" placeholder="Wisdom" class="left">
+		<input type="text" title="Charisma" Name="cha" placeholder="Charisma" class="right">
 
-echo "<input type=\"text\" title=\"Starting Location\" Name=\"location\" placeholder=\"Starting Location\" class=\"right\">";
+		<br /><br />
 
-echo "<br /><br />";
+		<input type="text" title="Luck" Name="lck" placeholder="Luck" style="width: 225px; margin-right: 275px;">
 
-echo "<input type=\"text\" title=\"Strength\" Name=\"str\" placeholder=\"Strength\" class=\"left\">";
+		<br /><br /><br />
 
-echo "<input type=\"text\" title=\"Dextertiy\" Name=\"dex\" placeholder=\"Dexterity\" class=\"right\">";
+		<input type="submit" value="Submit" style="width: 500px;">
 
-echo "<br /><br />";
-
-echo "<input type=\"text\" title=\"Constitution\" Name=\"con\" placeholder=\"Constitution\" class=\"left\">";
-
-echo "<input type=\"text\" title=\"Inteligence\" Name=\"intl\" placeholder=\"Inteligence\" class=\"right\">";
-
-echo "<br /><br />";
-
-echo "<input type=\"text\" title=\"Wisdom\" Name=\"wis\" placeholder=\"Wisdom\" class=\"left\">";
-
-echo "<input type=\"text\" title=\"Charisma\" Name=\"cha\" placeholder=\"Charisma\" class=\"right\">";
-
-echo "<br /><br />";
-
-echo "<input type=\"text\" title=\"Luck\" Name=\"lck\" placeholder=\"Luck\" style=\"width: 225px; margin-right: 275px;\">";
-
-echo "<br /><br /><br />";
-
-echo "<input type=\"submit\" value=\"Submit\" style=\"width: 500px;\">";
-
-echo "</form>";
-
-echo "</div>";
-
-
-
-?>
+	</form>
+</div>

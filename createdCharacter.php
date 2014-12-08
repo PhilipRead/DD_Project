@@ -20,7 +20,7 @@ form {
 }
 
 input[type=submit] {
-	width: 125px;
+	width: 300px;
 }
 
 </style>
@@ -41,6 +41,9 @@ if ($conn->connect_error)
     die("Connection failed: " . $conn->connect_error);
 } 
 
+$result = $conn->query("SELECT charCount FROM SystemVals");
+
+$Char_ID = $result->fetch_assoc()[$result->fetch_field_direct(0)->name];
 $Char_Name = $_GET["charName"];
 $Gender = $_GET["gender"];
 $Race = $_GET["race"];
@@ -56,7 +59,8 @@ $WIS = $_GET["wis"];
 $CHA = $_GET["cha"];
 $LCK = $_GET["lck"];
 
-$sql = "INSERT INTO CharacterTable VALUES (5, "
+$sql = "INSERT INTO CharacterTable VALUES ("
+. $Char_ID . ", "
 . "\"" . $Char_Name . "\", "
 . $Gender . ", "
 . $Race . ", "
@@ -72,17 +76,16 @@ $sql = "INSERT INTO CharacterTable VALUES (5, "
 . $CHA . ", "
 . $LCK . ")";
 
-//echo "<p> $sql </p>";
-
 $conn->query($sql);
+
+$conn->query("UPDATE SystemVals SET charCount = charCount + 1");
 
 echo "<p> $Char_Name Created! </p>";
 
-echo "<div class=\"menu\">";
-
-echo "<input type=\"submit\" value=\"Back to Account Info\" style=\"width: 225px; margin-right: 25px;\">";
-echo "<input type=\"submit\" value=\"Play This Character\" style=\"width: 225px; margin-right:25px;\">";
-
-echo "</div>";
-
 ?>
+
+<div class="menu">
+	<form action="mainMenu.php" method="get">
+		<input type="submit" value="Return To Main Menu">
+	</form>
+</div>;
