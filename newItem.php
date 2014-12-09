@@ -34,6 +34,27 @@ input[type=submit] {
 
 </style>
 
+<?php
+	$servername = "mysql.eecs.ku.edu";
+	$username = "acowdrey";
+	$password = "Jcony7490404=";
+	$dbname = "acowdrey";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+
+	// Check connection
+	if ($conn->connect_error) 
+	{
+		 die("Connection failed: " . $conn->connect_error);
+	} 
+
+	$sql = "SELECT * FROM Location";
+	$result = $conn->query($sql);
+	$numCols = $result->field_count;
+	$nameCol = "Name";
+?>
+
 <p> Create Item </p>
 
 <div class="menu">
@@ -52,7 +73,16 @@ input[type=submit] {
 
 		<br /><br />
 
-		<input type="text" title="Location" Name="location" placeholder="Location" style="width: 225px; margin-right: 275px;">
+		<?php
+			echo '<select Name="location" style="width: 225px; margin-right: 275px;">';
+
+			while($row = $result->fetch_assoc())
+			{
+				echo "<option value='" . $row["Loc_ID"] . "'> $row[$nameCol] </option>";
+			}
+
+			echo '</select>';
+		?>
 
 		<br /><br /><br />
 

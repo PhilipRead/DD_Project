@@ -34,10 +34,31 @@ input[type=submit] {
 
 </style>
 
+<?php
+	$servername = "mysql.eecs.ku.edu";
+	$username = "acowdrey";
+	$password = "Jcony7490404=";
+	$dbname = "acowdrey";
+
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+
+	// Check connection
+	if ($conn->connect_error) 
+	{
+		 die("Connection failed: " . $conn->connect_error);
+	} 
+
+	$sql = "SELECT * FROM Location";
+	$result = $conn->query($sql);
+	$numCols = $result->field_count;
+	$nameCol = "Name";
+?>
+
 <p> Create Character </p>
 
 <div style="text-align: center;">
-	<form action="createdCharacter.php" method="get">
+	<form action="createdCharacter.php" method="get" id="charForm">
 		<input type="text" title="Character Name" Name="charName" placeholder="Character Name" style="width: 500px;">
 
 		<br /><br />
@@ -53,7 +74,17 @@ input[type=submit] {
 		<br /><br />
 
 		<input type="text" title="Level" Name="level" placeholder="Level" class="left">
-		<input type="text" title="Starting Location" Name="location" placeholder="Starting Location" class="right">
+
+		<?php
+			echo '<select Name="location" class="right">';
+
+			while($row = $result->fetch_assoc())
+			{
+				echo "<option value='" . $row["Loc_ID"] . "'> $row[$nameCol] </option>";
+			}
+
+			echo '</select>';
+		?>
 
 		<br /><br />
 
@@ -80,3 +111,4 @@ input[type=submit] {
 
 	</form>
 </div>
+
