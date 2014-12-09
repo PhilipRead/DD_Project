@@ -27,7 +27,7 @@ input[type=submit] {
 
 <?php
 
-echo "<p> DnD Simulator </p>";
+echo "<p> DnD Manager </p>";
 
 echo "<div class=\"menu\">";
 
@@ -37,7 +37,7 @@ echo "<form action=\"mainView.php\" method=\"get\">
 
 echo "<br/>";
 
-echo "<form action=\"addToDatabase.php\" method=\"get\">
+echo "<form action=\"defaultMenu.php\" method=\"get\">
 		  <input type=\"submit\" value=\"Create Data\" style=\"width: 300px;\">
 	  </form>";
 

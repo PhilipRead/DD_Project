@@ -34,7 +34,7 @@ input[type=submit] {
 
 </style>
 
-<p> Create Item </p>
+<p> Create Location </p>
 
 <div class="menu">
 	<form action="createdLocation.php" method="get">
