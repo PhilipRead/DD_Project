@@ -44,10 +44,12 @@ $result = $conn->query("SELECT questCount FROM SystemVals");
 
 $Quest_ID = $result->fetch_assoc()[$result->fetch_field_direct(0)->name];
 $Details = $_GET["description"];
+$Name	= $_GET["Name"];
 
 $sql = "INSERT INTO Quest VALUES ("
 . $Quest_ID . ", "
-. "\"" . $Details . "\")";
+. "\"" . $Details . "\", "
+. "\"" . $Name . "\")";
 
 $conn->query($sql);
 

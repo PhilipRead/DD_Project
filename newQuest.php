@@ -34,7 +34,11 @@ textarea {
 
 <div class="menu">
 	<form action="createdQuest.php" method="get">
-		<textarea name="description"></textarea>
+		<input type="text" title="Quest Title" Name="Name" placeholder="Quest Title" style="width: 500px;">
+
+		<br /><br />
+
+		<textarea name="description" title="Quest Description" placeholder="Quest Description"></textarea>
 
 		<br /><br /><br />
 
