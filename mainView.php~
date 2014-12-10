@@ -304,15 +304,15 @@ echo '<script src="jquery.js"></script>
 		}
 
 		function loadQuests() {
-			var selectedVal = $("#questSelect").val()
 			if(selectedVal) {
+				var selectedVal = $("#questSelect").val()
 
 				$( "#questContent" ).val(quests[selectedVal]);
 			}
 		}
 
 		function createChars( except ) {
-			returnHTML = "<select Name=\"receimyver\">";
+			returnHTML = "<select Name=\"receiver\">";
 			for (var charName in charStats) {
 				if(charStats.hasOwnProperty(charName)) {
 					if(charName != except){
