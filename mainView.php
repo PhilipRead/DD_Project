@@ -13,20 +13,47 @@ p {
 {
 	background-color: black;
 
-	height: 50%;
-	width: 31.5%;
+	height: 49%;
+	width: 32.5%;
 	color: yellow;
 	border: 1px solid red;
 	padding: 5px;
 	float: left;
-	min-width: 0;
+
 }
 
-.statsHead, .invHead, .locHead, .questHead
+.statsHead, .itemHead, .locHead, .questHead
 {
 	font-size: 150%;
 }
 
+#questView
+{
+	width:99%;
+}
+
+#locContent, #statsContent, #questContent
+{
+	resize: none;
+	background-color: black;
+	color: yellow;
+	width: 100%;
+	height: 84%;
+
+}
+#itemContent
+{
+	background-color: black;
+	color: yellow;
+	width: 100%;
+	height: 84%;
+	border: 1px solid rgb(169, 169, 169);
+}
+
+form
+{
+	margin-bottom: 5px;
+}
 
 
 </style>
@@ -65,35 +92,22 @@ $statsRows = [];
 
 while($row = $result->fetch_assoc())
 {
-	echo "<option value= $row[$nameCol] > $row[$nameCol] </option>";
+	echo "<option value='" . $row[$nameCol] . "'> $row[$nameCol] </option>";
 	$statsRows[$row[$nameCol]] = $row;
 }
 
-echo	'</select>
-	<div id="statsContent">
-		<p>Level: <span id="Level"></span></p>
-		<p>Class: <span id="Class"></span></p>
-		<p>Race: <span id="Race"></span></p>
-		<p>Alignment: <span id="Alignment"></span></p>
-		<p>Gender: <span id="Gender"></span></p>
-		<br/>
-		<p>STR: <span id="STR"></span></p>
-		<p>DEX: <span id="DEX"></span></p>
-		<p>CON: <span id="CON"></span></p>
-		<p>INTL: <span id="INTL"></span></p>
-		<p>WIS: <span id="WIS"></span></p>
-		<p>CHA: <span id="CHA"></span></p>
-		<p>LCK: <span id="LCK"></span></p></div>
+echo	'</select><br/><br/>
+	<textarea id="statsContent"></textarea>
 	</div>';
 
 
 
-//Inventory Block
-echo "<div id=\"invView\" class=\"viewBox\">
-	<div class=\"invHead\">Inventories</div>
+//Items Block
+echo "<div id=\"itemView\" class=\"viewBox\">
+	<div class=\"itemHead\">Items</div>
 	<br/>";
 
-$sql = "SELECT Char_Name, Name\n"
+$sql =  "SELECT Char_Name, Name\n"
     . "FROM CharacterTable, CharacterHas, Items\n"
     . "WHERE CharacterTable.Char_ID = CharacterHas.Char_ID\n"
     . "AND CharacterHas.Item_ID = Items.Item_ID";
@@ -101,25 +115,44 @@ $result = $conn->query($sql);
 $numCols = $result->field_count;
 $nameCol = "Char_Name";
 
-echo "<select id=\"invSelect\">";
+echo "<select id=\"itemSelect\">";
 
-$invDic = [];
+$itemDic = [];
 
 while($row = $result->fetch_assoc())
 {
-	if($invDic[$row[$nameCol]] == NULL)
+	if($itemDic[$row[$nameCol]] == NULL)
 	{
-		echo "<option value= $row[$nameCol] > $row[$nameCol] </option>";
-		$invDic[$row[$nameCol]] = [$row["Name"]];
+		echo "<option value='" . $row[$nameCol] . "'> $row[$nameCol] </option>";
+		$itemDic[$row[$nameCol]] = [$row["Name"]];
 	}
 	else
 	{
-		$invDic[$row[$nameCol]][] = $row["Name"];
+		$itemDic[$row[$nameCol]][] = $row["Name"];
 	}
 }
 
-echo	'</select>
-	<div id="invContent"></div>
+$itemDic["Unowned"] = [];
+echo "<option value='Unowned'> Unowned </option>";
+
+$sql = "SELECT Name\n"
+    . "FROM Items \n"
+    . "WHERE Name NOT IN\n"
+    . "(SELECT Name\n"
+    . "FROM CharacterTable, CharacterHas, Items\n"
+    . "WHERE CharacterTable.Char_ID = CharacterHas.Char_ID\n"
+    . "AND CharacterHas.Item_ID = Items.Item_ID)";
+$result = $conn->query($sql);
+$numCols = $result->field_count;
+$nameCol = "Name";
+
+while($row = $result->fetch_assoc())
+{
+	$itemDic["Unowned"][] = $row[$nameCol];
+}
+
+echo	'</select><br/><br/>
+	<div id="itemContent"></div>
 	</div>';
 
 
@@ -135,7 +168,7 @@ $result = $conn->query($sql);
 $numCols = $result->field_count;
 $nameCol = "Name";
 
-echo "<select id=\"locSelect\">";
+echo '<select id="locSelect">';
 
 $locDic = [];
 
@@ -143,7 +176,7 @@ while($row = $result->fetch_assoc())
 {
 	if($locDic[$row[$nameCol]] == NULL)
 	{
-		echo "<option value= $row[$nameCol] > $row[$nameCol] </option>";
+		echo "<option value='" . $row[$nameCol] . "'> $row[$nameCol] </option>";
 		$locDic[$row[$nameCol]] = [$row["Char_Name"]];
 	}
 	else
@@ -152,8 +185,8 @@ while($row = $result->fetch_assoc())
 	}
 }
 
-echo	'</select>
-	<div id="locContent"></div>
+echo	'</select><br/><br/>
+	<textarea readonly id="locContent"></textarea>
 	</div>';
 
 //Quests Block
@@ -177,8 +210,8 @@ while($row = $result->fetch_assoc())
 	$questDic[$row[$nameCol]] = $row["Details"];
 }
 
-echo	'</select>
-	<textarea id="questContent"></textarea>
+echo	'</select><br/><br/>
+	<textarea readonly id="questContent"></textarea>
 	</div>';
 
 
@@ -186,7 +219,7 @@ echo '<script src="jquery.js"></script>
 	  <script>
 
 		var charStats = ' . json_encode($statsRows) . ';
-		var invents = ' . json_encode($invDic) . ';
+		var invents = ' . json_encode($itemDic) . ';
 		var locChars = ' . json_encode($locDic) . ';
 		var quests = ' . json_encode($questDic) . ';
 
@@ -201,7 +234,7 @@ echo '<script src="jquery.js"></script>
 			change: loadStats
 		});
 
-		$( "#invSelect").on({
+		$( "#itemSelect").on({
 			change: loadInventories
 		});
 
@@ -213,53 +246,85 @@ echo '<script src="jquery.js"></script>
 			change: loadQuests
 		});
 
-		function loadStats() {
+		function loadStats() {			
 			var selectedVal = $("#charSelect").val()
-				
-			$( "#Level" ).html(charStats[selectedVal].Level)
-			$( "#Class" ).html(charStats[selectedVal].Class)
-			$( "#Race" ).html(charStats[selectedVal].Race)
-			$( "#Alignment" ).html(charStats[selectedVal].Alignment)
-			$( "#Gender" ).html(charStats[selectedVal].Gender)
+			
+			if(selectedVal) {
+				var curStats = "";
 
-			$( "#STR" ).html(charStats[selectedVal].STR)
-			$( "#DEX" ).html(charStats[selectedVal].DEX)
-			$( "#CON" ).html(charStats[selectedVal].CON)
-			$( "#INTL" ).html(charStats[selectedVal].INTL)
-			$( "#WIS" ).html(charStats[selectedVal].WIS)
-			$( "#CHA" ).html(charStats[selectedVal].CHA)
-			$( "#LCK" ).html(charStats[selectedVal].LCK)
+				curStats += "Level: " + charStats[selectedVal].Level + "\n";
+				curStats += "Class: " + charStats[selectedVal].Class + "\n";
+				curStats += "Race: " + charStats[selectedVal].Race + "\n";
+				curStats += "Alignment: " + charStats[selectedVal].Alignment + "\n";
+				curStats += "Gender: " + charStats[selectedVal].Gender + "\n\n";
+
+				curStats += "STR: " + charStats[selectedVal].STR + "\n";
+				curStats += "DEX: " + charStats[selectedVal].DEX + "\n";
+				curStats += "CON: " + charStats[selectedVal].CON + "\n";
+				curStats += "INTL: " + charStats[selectedVal].INTL + "\n";
+				curStats += "WIS: " + charStats[selectedVal].WIS + "\n";
+				curStats += "CHA: " + charStats[selectedVal].CHA + "\n";
+				curStats += "LCK: " + charStats[selectedVal].LCK + "\n";
+
+				$( "#statsContent" ).val(curStats);
+			}
 		}
 
 		function loadInventories() {
-			var selectedVal = $("#invSelect").val()
+			var selectedVal = $("#itemSelect").val()
 			
-			var curInv = "";
-			var i;
-			for(i = 0; i < invents[selectedVal].length; i++)
-			{
-				curInv += "<p>" + invents[selectedVal][i] + "</p>"
+			if(selectedVal) {
+				var curInv = "";
+				var i;
+				for(i = 0; i < invents[selectedVal].length; i++)
+				{
+					curInv += "<form action=\"giveItem.php\" method=\"get\">"
+							   + "<input type=\"hidden\" name=\"giver\" value=\"" + selectedVal + "\">"
+							   + "<input type=\"hidden\" name=\"item\" value=\"" + invents[selectedVal][i] + "\">"
+							   + invents[selectedVal][i] + "  </input><input type=\"submit\" value=\"Give\">"
+							   + "<span>  to  </span>" + createChars(selectedVal) + "</form>";
+				}
+				$( "#itemContent" ).html(curInv);
 			}
-			$( "#invContent" ).html(curInv);
 		}
 
 		function loadLocations() {
 			var selectedVal = $("#locSelect").val()
-			
-			var curChars = "";
-			var i;
-			for(i = 0; i < locChars[selectedVal].length; i++)
-			{
-				curChars += "<p>" + locChars[selectedVal][i] + "</p>"
+
+			if(selectedVal) {
+
+				var curChars = "";
+				var i;
+				for(i = 0; i < locChars[selectedVal].length; i++)
+				{
+					curChars += locChars[selectedVal][i] + "\n"
+				}
+				$( "#locContent" ).val(curChars);
 			}
-			$( "#locContent" ).html(curChars);
 		}
 
 		function loadQuests() {
-			var selectedVal = $("#questSelect").val()
+			if(selectedVal) {
+				var selectedVal = $("#questSelect").val()
 
-			console.log(selectedVal);
-			$( "#questContent" ).val(quests[selectedVal]);
+				$( "#questContent" ).val(quests[selectedVal]);
+			}
+		}
+
+		function createChars( except ) {
+			returnHTML = "<select Name=\"receiver\">";
+			for (var charName in charStats) {
+				if(charStats.hasOwnProperty(charName)) {
+					if(charName != except){
+						returnHTML += "<option value=\"" + charName + "\">" + charName + "</option>";
+					}
+				}
+			}
+			if(except != "Unowned") {
+				returnHTML += "<option value=\"Unowned\">Unowned</option>";
+			}
+			returnHTML += "</select>";
+			return returnHTML;
 		}
 
 </script>';

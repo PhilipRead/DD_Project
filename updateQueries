@@ -1,0 +1,22 @@
+DELETE FROM CharacterHas
+WHERE Item_ID = (SELECT Item_ID
+				 FROM Items
+				 WHERE Name = "Iron Helm")  Give to unowned
+
+(UPDATE CharacterHas
+SET Char_ID = "Rec_ID"
+WHERE Item_ID = "Item_ID")
+
+INSERT INTO CharacterHas
+VALUES (<Char_ID>, <Item_ID>, 1)
+
+
+(SELECT Char_ID
+FROM CharacterTable
+WHERE Char_Name = "KING BOB") receiving and giving Char_ID s
+
+(SELECT Item_ID
+FROM Items
+WHERE Name = "Gold Ring") item Item_ID
+
+

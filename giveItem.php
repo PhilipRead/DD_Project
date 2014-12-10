@@ -20,15 +20,40 @@ $receiver = $_GET["receiver"];
 
 if($giver == "Unowned")
 {
-	//$conn->query("SELECT locationCount FROM SystemVals");
+	$sql = "INSERT INTO CharacterHas " .
+		   "VALUES (" . 
+				"(SELECT Char_ID " .
+				 "FROM CharacterTable " .
+				 "WHERE Char_Name = \"$receiver\"), " . 
+				"(SELECT Item_ID " .
+				 "FROM Items " .
+				 "WHERE Name = \"$item\"), 1)";
+
+	$conn->query($sql);
 }
 else if($receiver == "Unowned")
 {
-	//$conn->query("SELECT locationCount FROM SystemVals");
+	$sql = "DELETE FROM CharacterHas " .
+			"WHERE Item_ID = " . 
+				"(SELECT Item_ID " .
+				 "FROM Items " .
+				 "WHERE Name = \"$item\")";
+
+	$conn->query($sql);
 }
 else
 {
-	//$conn->query("SELECT locationCount FROM SystemVals");
+	$sql = "UPDATE CharacterHas " .
+		   "SET Char_ID = " .
+				"(SELECT Char_ID " .
+				"FROM CharacterTable " .
+				"WHERE Char_Name = \"$receiver\") " .
+           "WHERE Item_ID = " .
+				"(SELECT Item_ID " .
+				"FROM Items " .
+				"WHERE Name = \"$item\")";
+
+	$conn->query($sql);
 }
 
 //Redirect back to the main screen
