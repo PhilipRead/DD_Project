@@ -63,13 +63,42 @@ input[type=submit] {
 
 		<br /><br />
 
-		<input type="text" title="Ability" Name="ability" placeholder="Ability" class="left">
+		<select title="Ability" Name="ability" class="left">
+			<option value="0">None</option>
+			<option value="1">Striking</option>
+			<option value="2">Smashing</option>
+			<option value="3">Arcing</option>
+			<option value="4">Blazing</option>
+			<option value="5">Coolant</option>
+			<option value="6">Branding</option>
+			<option value="7">Dispelling</option>
+			<option value="8">Exploding</option>
+			<option value="9">Flaying</option>
+			<option value="10">Killing</option>
+			<option value="11">Spell Drain</option>
+			<option value="12">Shockwave</option>
+			<option value="13">Unholy</option>
+		</select>
+
 		<input type="text" title="Cost" Name="cost" placeholder="Cost" class="right">
 
 		<br /><br />
 
 		<input type="text" title="Weight" Name="weight" placeholder="Weight" class="left">
-		<input type="text" title="Type" Name="type" placeholder="Type" class="right">
+
+		<select Name="type" title="Type" class="right">
+			<option value="0">Weapon</option>
+			<option value="1">Armor</option>
+			<option value="2">Ring</option>
+			<option value="3">Amulet</option>
+			<option value="4">Potion</option>
+			<option value="5">Rod</option>
+			<option value="6">Staff</option>
+			<option value="7">Wand</option>
+			<option value="8">Scroll</option>
+			<option value="9">Quest Item</option>
+			<option value="10">Misc Item</option>
+		</select>
 
 		<br /><br />
 

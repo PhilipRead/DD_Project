@@ -47,7 +47,15 @@ input[type=submit] {
 
 		<br /><br />
 
-		<input type="text" title="Type" Name="type" placeholder="Type" style="width: 225px; margin-right: 275px;">
+		<select Name="type" style="width: 225px; margin-right: 275px;" title="Type">
+			<option value="0">Dungeon</option>
+			<option value="1">City</option>
+			<option value="2">Town</option>
+			<option value="3">Bulding</option>
+			<option value="4">Room</option>
+			<option value="5">Point of Interest</option>
+			<option value="6">Other</option>
+		</select>
 
 		<br /><br /><br />
 
